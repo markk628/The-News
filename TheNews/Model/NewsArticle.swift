@@ -29,7 +29,7 @@ import Foundation
 //        content = try newsArticleContainer.decode(String.self, forKey: .content)
 //    }
 //}
-
+//
 //struct NewsArticleList: Codable {
 //    let status: String
 //    let totalResults: Int
