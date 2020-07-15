@@ -9,7 +9,7 @@
 import UIKit
 
 class CategoryCell: UICollectionViewCell {
-    static var identifier: String = "CategoryCell"
+    static let identifier: String = "CategoryCell"
     
     var category: Category? {
         didSet {

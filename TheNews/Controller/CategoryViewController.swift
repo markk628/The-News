@@ -84,5 +84,4 @@ extension CategoryViewController: UICollectionViewDelegateFlowLayout, UICollecti
         vc.title = categories[indexPath.row].categoryName
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    
 }

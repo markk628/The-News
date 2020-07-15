@@ -11,7 +11,7 @@ import Kingfisher
 
 class NewsArticleCell: UITableViewCell {
 
-    static var identifier = "NewsCell"
+    static let identifier = "NewsCell"
         
     var data: NewsArticle? {
         didSet {
@@ -22,7 +22,7 @@ class NewsArticleCell: UITableViewCell {
         }
     }
     
-    var newsStack: UIStackView = {
+    let newsStack: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
@@ -30,21 +30,21 @@ class NewsArticleCell: UITableViewCell {
         return stack
     }()
     
-    var newsTitle: UILabel = {
-        let newsLabel = UILabel()
-        newsLabel.translatesAutoresizingMaskIntoConstraints = false
-        newsLabel.numberOfLines = 0
-        newsLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-        newsLabel.adjustsFontSizeToFitWidth = true
-        return newsLabel
+    let newsTitle: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.adjustsFontSizeToFitWidth = true
+        return label
     }()
     
-    var newsImage: UIImageView = {
+    let newsImage: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.layer.cornerRadius = 10.0
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
+        image.layer.cornerRadius = 10.0
         return image
     }()
 
@@ -56,7 +56,7 @@ class NewsArticleCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?){
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setUpNewsStack()
     }
@@ -65,7 +65,7 @@ class NewsArticleCell: UITableViewCell {
         super.init(coder: aDecoder)
     }
     
-    func setUpNewsStack(){
+    func setUpNewsStack() {
         self.addSubview(newsStack)
         NSLayoutConstraint.activate([
             newsStack.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),

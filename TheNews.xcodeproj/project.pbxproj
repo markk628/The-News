@@ -26,7 +26,6 @@
 		FE7EBFC424BCDB1C00ED4B21 /* NewsArticleListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7EBFC324BCDB1C00ED4B21 /* NewsArticleListViewController.swift */; };
 		FEA6A31C24BD5E73006C2DA4 /* NewsArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA6A31B24BD5E73006C2DA4 /* NewsArticleCell.swift */; };
 		FEA6A32024BD6072006C2DA4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = FEA6A31F24BD6072006C2DA4 /* Kingfisher */; };
-		FEA6A32424BD833C006C2DA4 /* NewsArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA6A32324BD833C006C2DA4 /* NewsArticleViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +70,6 @@
 		FE7EBFC124BCD43F00ED4B21 /* CategoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		FE7EBFC324BCDB1C00ED4B21 /* NewsArticleListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleListViewController.swift; sourceTree = "<group>"; };
 		FEA6A31B24BD5E73006C2DA4 /* NewsArticleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleCell.swift; sourceTree = "<group>"; };
-		FEA6A32324BD833C006C2DA4 /* NewsArticleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsArticleViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,7 +157,6 @@
 			children = (
 				FE0D470B24B82ACA00D66332 /* CategoryViewController.swift */,
 				FE7EBFC324BCDB1C00ED4B21 /* NewsArticleListViewController.swift */,
-				FEA6A32324BD833C006C2DA4 /* NewsArticleViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -347,7 +344,6 @@
 				FE7EBFAF24BCCCC800ED4B21 /* NewsArticle.swift in Sources */,
 				FE7EBFB724BCD0FE00ED4B21 /* Request.swift in Sources */,
 				FE7EBFC424BCDB1C00ED4B21 /* NewsArticleListViewController.swift in Sources */,
-				FEA6A32424BD833C006C2DA4 /* NewsArticleViewController.swift in Sources */,
 				FE7EBFBF24BCD31B00ED4B21 /* Response.swift in Sources */,
 				FEA6A31C24BD5E73006C2DA4 /* NewsArticleCell.swift in Sources */,
 				FE7EBFBB24BCD19A00ED4B21 /* NetworkError.swift in Sources */,

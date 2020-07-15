@@ -8,7 +8,7 @@
 
 import Foundation
 
-//struct NewsArticle: Codable{
+//struct NewsArticle: Codable {
 //    var title: String?
 //    var url: String?
 //    var urlToImage: String?
@@ -49,7 +49,7 @@ import Foundation
 //    }
 //}
 
-struct NewsArticle: Decodable{
+struct NewsArticle: Decodable {
     var title: String?
     var url: String?
     var urlToImage: String?

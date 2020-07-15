@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import SafariServices
 
 class NewsArticleListViewController: UIViewController {
     
     var category: String = "business"
+    let network = APIClient()
     
     let newsArticleTableView: UITableView = {
         let tableView = UITableView()
@@ -24,13 +26,11 @@ class NewsArticleListViewController: UIViewController {
         }
     }
     
-    var network = APIClient()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         updateFeed()
-        setTable()
+        setNewsArticlesTableView()
     }
     
     func updateFeed(){
@@ -44,7 +44,7 @@ class NewsArticleListViewController: UIViewController {
         }
     }
     
-    func setTable(){
+    func setNewsArticlesTableView() {
         self.view.addSubview(newsArticleTableView)
         newsArticleTableView.register(NewsArticleCell.self, forCellReuseIdentifier: NewsArticleCell.identifier)
         newsArticleTableView.dataSource = self
@@ -62,7 +62,7 @@ class NewsArticleListViewController: UIViewController {
     
 }
 
-extension NewsArticleListViewController: UITableViewDelegate, UITableViewDataSource{
+extension NewsArticleListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.newsArticles.count
     }
@@ -76,22 +76,11 @@ extension NewsArticleListViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let news = newsArticles[indexPath.row]
-        let vc = NewsArticleViewController()
-        //Assigning Title
-        vc.newsTitle = news.title!
-        //Assigning Content
-        guard let newsContent = news.content else{
-            print("No content")
-            return
-        }
-        vc.news = newsContent
         guard let newsURL = news.url else {
             print("No URL found")
             return
         }
-        vc.theNews = newsURL
-        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = SFSafariViewController(url: URL(string: newsURL)!)
+        present(vc, animated: true)
     }
-    
-    
 }

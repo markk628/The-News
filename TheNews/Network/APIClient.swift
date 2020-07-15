@@ -16,7 +16,7 @@ class APIClient {
     var baseURL = "https://newsapi.org/v2/"
     
     func getNewsArticles(_ category:String, completion: @escaping (Result<[NewsArticle]>) -> ()) {
-        let request = makeRequest(for: .articles(category: category))
+        let request = Request().makeRequest(for: .articles(category: category))
         urlSession.dataTask(with: request) { (data, response, error) in
             if let response = response as? HTTPURLResponse, let data = data {
                 let result = Response.handleResponse(for: response)
@@ -45,64 +45,4 @@ class APIClient {
 //            }
 //        }.resume()
 //    }
-
-    
-    enum EndPoints {
-        case articles(category: String)
-        case contents
-        
-        func getPath() -> String {
-            switch self {
-            case .articles:
-                return "top-headlines"
-            case .contents:
-                return "top-headlines"
-            }
-        }
-        
-        func getHTTPMethod() -> String {
-            return "GET"
-        }
-        
-        func getHeaders(token: String) -> [String: String] {
-            return [
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-                "Authorization": "X-Api-Key \(apiKey)",
-                "Host": "newsapi.org"
-            ]
-        }
-        
-        func getParameters() -> [String:String] {
-            switch self {
-            case .articles(let category):
-                return[
-                    "country": "us",
-                    "category": category,
-                    "apiKey": apiKey
-                ]
-            case .contents:
-                return[
-                    "i": "i"
-                ]
-            }
-        }
-        
-        func parametersToString() -> String {
-            let parameterArray = getParameters().map { key, value in
-                return "\(key)=\(value)"
-            }
-            return parameterArray.joined(separator: "&")
-        }
-    }
-    
-    private func makeRequest(for endPoint: EndPoints) -> URLRequest {
-        let fullURL = URL(string: baseURL.appending("\(endPoint.getPath())?\(endPoint.parametersToString())"))!
-        
-        var request = URLRequest(url: fullURL)
-        request.httpMethod = endPoint.getHTTPMethod()
-        request.allHTTPHeaderFields = endPoint.getHeaders(token: apiKey)
-
-        return request
-    }
 }

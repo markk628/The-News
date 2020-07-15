@@ -25,6 +25,56 @@ struct Request {
         "Accept": "application/json",
         "Content-Type": "application/json",
     ]
+    var baseURL = "https://newsapi.org/v2/"
+    
+    enum EndPoints {
+        case articles(category: String)
+        case contents
+        
+        func getPath() -> String {
+            switch self {
+            case .articles:
+                return "top-headlines"
+            case .contents:
+                return "top-headlines"
+            }
+        }
+        
+        func getHTTPMethod() -> String {
+            return "GET"
+        }
+        
+        func getHeaders(token: String) -> [String: String] {
+            return [
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": "X-Api-Key \(apiKey)",
+                "Host": "newsapi.org"
+            ]
+        }
+        
+        func getParameters() -> [String:String] {
+            switch self {
+            case .articles(let category):
+                return[
+                    "country": "us",
+                    "category": category,
+                    "apiKey": apiKey
+                ]
+            case .contents:
+                return[
+                    "i": "i"
+                ]
+            }
+        }
+        
+        func parametersToString() -> String {
+            let parameterArray = getParameters().map { key, value in
+                return "\(key)=\(value)"
+            }
+            return parameterArray.joined(separator: "&")
+        }
+    }
     
     static func configureRequest(from route: Route, with parameters: [String: Any], and method: HTTPMethod, contains body: Data?) throws -> URLRequest {
         guard let url = URL(string: "https://newsapi.org/v2/top-headlines?country=us&category=\(route.rawValue)") else { fatalError("Error while unwrapping url") }
@@ -44,5 +94,15 @@ struct Request {
         } catch {
             throw NetworkError.encodingFailed
         }
+    }
+    
+    func makeRequest(for endPoint: EndPoints) -> URLRequest {
+        let fullURL = URL(string: baseURL.appending("\(endPoint.getPath())?\(endPoint.parametersToString())"))!
+        
+        var request = URLRequest(url: fullURL)
+        request.httpMethod = endPoint.getHTTPMethod()
+        request.allHTTPHeaderFields = endPoint.getHeaders(token: apiKey)
+
+        return request
     }
 }

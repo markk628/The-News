@@ -14,7 +14,7 @@ enum Result<T> {
 }
 
 struct Response {
-    static func handleResponse(for response: HTTPURLResponse?) -> Result<String>{
+    static func handleResponse(for response: HTTPURLResponse?) -> Result<String> {
         guard let res = response else { return Result.failure(NetworkError.noResponse) }
         switch res.statusCode {
         case 200...299:
