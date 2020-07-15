@@ -9,6 +9,7 @@
 import UIKit
 
 class CategoryCell: UICollectionViewCell {
+    
     static let identifier: String = "CategoryCell"
     
     var category: Category? {

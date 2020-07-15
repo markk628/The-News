@@ -14,17 +14,19 @@ class NewsArticleListViewController: UIViewController {
     var category: String = "business"
     let network = APIClient()
     
-    let newsArticleTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        return tableView
-    }()
-    
     var newsArticles: [NewsArticle] = [] {
         didSet {
             newsArticleTableView.reloadData()
         }
     }
+    
+    let newsArticleTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(NewsArticleCell.self, forCellReuseIdentifier: NewsArticleCell.identifier)
+        tableView.rowHeight = 130
+        return tableView
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,11 +48,8 @@ class NewsArticleListViewController: UIViewController {
     
     func setNewsArticlesTableView() {
         self.view.addSubview(newsArticleTableView)
-        newsArticleTableView.register(NewsArticleCell.self, forCellReuseIdentifier: NewsArticleCell.identifier)
         newsArticleTableView.dataSource = self
         newsArticleTableView.delegate = self
-        self.view.backgroundColor = .white
-        newsArticleTableView.rowHeight = 125
         
         NSLayoutConstraint.activate([
             newsArticleTableView.topAnchor.constraint(equalTo: self.view.topAnchor),
