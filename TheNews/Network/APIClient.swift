@@ -10,13 +10,8 @@ import Foundation
 
 class APIClient {
     let urlSession = URLSession.shared
-    let parameters = [
-        "articles": "top-headlines",
-        "contents": "top-headlines"
-    ]
-    var baseURL = "https://newsapi.org/v2/"
     
-    func getNewsArticles(_ category:String, completion: @escaping (Result<[NewsArticle]>) -> ()) {
+    func getNewsArticles(_ category: String, completion: @escaping (Result<[NewsArticle]>) -> ()) {
         let request = Request().makeRequest(for: .articles(category: category))
         urlSession.dataTask(with: request) { (data, response, error) in
             if let response = response as? HTTPURLResponse, let data = data {

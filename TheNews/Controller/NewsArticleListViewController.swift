@@ -16,7 +16,7 @@ class NewsArticleListViewController: UIViewController {
     
     var newsArticles: [NewsArticle] = [] {
         didSet {
-            newsArticleTableView.reloadData()
+            self.newsArticleTableView.reloadData()
         }
     }
     

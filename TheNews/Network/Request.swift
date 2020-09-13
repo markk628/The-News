@@ -16,10 +16,6 @@ public enum HTTPMethod: String {
     case delete = "DELETE"
 }
 
-public enum Route: String {
-    case category = "category"
-}
-
 struct Request {
     static let headers = [
         "Accept": "application/json",
@@ -27,21 +23,55 @@ struct Request {
     ]
     var baseURL = "https://newsapi.org/v2/"
     
+//    enum EndPoints {
+//        case articles(category: String)
+//        case contents
+//
+//        func getPath() -> String {
+//            switch self {
+//            case .articles:
+//                return "top-headlines"
+//            case .contents:
+//                return "top-headlines"
+//            }
+//        }
+//
+//        func getHeaders() -> [String: String] {
+//            return [
+//                "Accept": "application/json",
+//                "Content-Type": "application/json",
+//                "Authorization": "X-Api-Key \(apiKey)",
+//                "Host": "newsapi.org"
+//            ]
+//        }
+//
+//        func getParameters() -> [String: String] {
+//            switch self {
+//            case .articles(let category):
+//                return[
+//                    "country": "us",
+//                    "category": category,
+//                    "apiKey": apiKey
+//                ]
+//            case .contents:
+//                return[
+//                    "i": "i"
+//                ]
+//            }
+//        }
+//
+//        func parametersToString() -> String {
+//            let parameterArray = getParameters().map { key, value in
+//                return "\(key)=\(value)"
+//            }
+//            return parameterArray.joined(separator: "&")
+//        }
+//    }
     enum EndPoints {
         case articles(category: String)
-        case contents
         
         func getPath() -> String {
-            switch self {
-            case .articles:
-                return "top-headlines"
-            case .contents:
-                return "top-headlines"
-            }
-        }
-        
-        func getHTTPMethod() -> String {
-            return "GET"
+            return "top-headlines"
         }
         
         func getHeaders() -> [String: String] {
@@ -53,17 +83,13 @@ struct Request {
             ]
         }
         
-        func getParameters() -> [String:String] {
+        func getParameters() -> [String: String] {
             switch self {
             case .articles(let category):
                 return[
                     "country": "us",
                     "category": category,
                     "apiKey": apiKey
-                ]
-            case .contents:
-                return[
-                    "i": "i"
                 ]
             }
         }
@@ -80,9 +106,9 @@ struct Request {
         let fullURL = URL(string: baseURL.appending("\(endPoint.getPath())?\(endPoint.parametersToString())"))!
         
         var request = URLRequest(url: fullURL)
-        request.httpMethod = endPoint.getHTTPMethod()
+        request.httpMethod = HTTPMethod.get.rawValue
         request.allHTTPHeaderFields = endPoint.getHeaders()
-
+        
         return request
     }
 }

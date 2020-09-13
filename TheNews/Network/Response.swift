@@ -29,5 +29,4 @@ struct Response {
             return .failure(NetworkError.failed)
         }
     }
-
 }
